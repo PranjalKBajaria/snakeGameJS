@@ -25,9 +25,19 @@
 }
 
 .head{
-    background-color: red;
+    background-color: green;
+    border-radius: 40%;
+    border: 1px solid whitesmoke;
+}
+
+.snake{
+    background-color: rgb(112, 177, 16);
+    border-radius: 40%;
+    border: 1px solid whitesmoke;
 }
 
 .food{
-    background-color: rgb(71, 71, 141) ;
+    background-color: rgb(228, 96, 96);
+    border-radius: 10%;
+    border: 1px solid slateblue;
 }
