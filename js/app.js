@@ -9,7 +9,7 @@ const gameOverSound = new Audio('Resources/gameover.mp3');
 const moveSound = new Audio('Resources/move.mp3');
 const musicSound = new Audio('Resources/bg.mp3');
 musicSound.volume = 0.4;
-let speed = 5;
+let speed = 12;
 let lastPaintTime = 0;
 let score = 0;
 
@@ -28,12 +28,23 @@ const main = (ctime) => {
     gameEngine();
 }
 
-function isCollide(arr){
+function isCollide(snake) {
+    // If you bump into yourself 
+    for (let i = 1; i < snakeArr.length; i++) {
+        if(snake[i].x === snake[0].x && snake[i].y === snake[0].y){
+            return true;
+        }
+    }
+    // If you bump into the wall
+    if(snake[0].x >= 18 || snake[0].x <=0 || snake[0].y >= 18 || snake[0].y <=0){
+        return true;
+    }
+        
     return false;
 }
 
 function gameEngine(){
-
+    musicSound.play();
     // COllision Detection
     if(isCollide(snakeArr)){
         gameOverSound.play();
@@ -48,6 +59,7 @@ function gameEngine(){
     // If snake has eaten another morsel fof food
     if(snakeArr[0].y === food.y && snakeArr[0].x === food.x){
         foodSound.play();
+        score += 1;
         snakeArr.unshift({x: snakeArr[0].x + inputDir.x,
                           y: snakeArr[0].y + inputDir.y})
         let a = 2;
@@ -84,7 +96,6 @@ function gameEngine(){
 }
 
 
-musicSound.play();
 window.requestAnimationFrame(main);
 window.addEventListener('keydown', e => {
     inputDir = {x: 0, y: 1};
